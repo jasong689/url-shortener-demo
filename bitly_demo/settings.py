@@ -24,7 +24,7 @@ SETTINGS_PATH = Path(__file__).resolve().parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'x(76ohtj)9@kh1&&r-$njecxv3!&^y@&=75dx*2jl)1%ej#y01'
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
