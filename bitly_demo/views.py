@@ -5,26 +5,23 @@ from .factories.form import FormFactory
 from .services.url import UrlService
 from .exceptions.not_valid import NotValidException
 from .exceptions.hash_exists import HashExists
+from django.conf import settings
 
 def url_view(request):
     if request.method == 'POST':
         form = FormFactory.get_form(request.POST)
 
-        print(form)
-
         if form.is_valid():
             try:
                 shortened_url = UrlService().generate_short_from_url(form)
-            except NotValidException as nve:
+            except NotValidException:
                 return render(request, 'url_not_valid.html')
-            except HashExists as he:
+            except HashExists:
                 return render(request, 'form.html', { 'is_custom': True, 'hash_exists': True })
 
-            return render(request, 'submit_response.html', { 'shortened_url': shortened_url })
-        else:
-            return HttpResponseNotFound()
-    else:
-        return HttpResponseNotFound()
+            return render(request, 'submit_response.html', { 'shortened_url': shortened_url, 'scheme': settings.SCHEME })
+
+    return HttpResponseNotFound()
 
 def form_custom(request):
     return render(request, 'form.html', { 'is_custom': True })

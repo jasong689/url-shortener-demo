@@ -11,10 +11,10 @@ class UrlService:
         self.repo = UrlRepository()
 
     def get_url_from_short(self, short_url):
-        hash = self.parser.get_hash_from_url(short_url)
+        parseResult = self.parser.get_hash_from_url(short_url)
         
         try:
-            result = self.repo.get_url_by_short(hash)
+            result = self.repo.get_url_by_short(parseResult.hash, parseResult.version)
             return result.original_url
         except Link.DoesNotExist:
             return None

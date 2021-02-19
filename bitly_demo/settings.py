@@ -132,3 +132,4 @@ STATIC_URL = '/static/'
 HASH_LENGTH = 6
 
 HOST = os.environ["HOSTNAME"] + ":" + os.environ["PORT"]
+SCHEME = os.environ["SCHEME"]

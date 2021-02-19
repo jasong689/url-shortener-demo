@@ -17,6 +17,7 @@ services:
       - HOSTNAME=localhost
       - PORT=8080
       - SECRET_KEY=${SECRET_KEY}
+      - SCHEME=http
   postgres:
     image: postgres
     volumes:

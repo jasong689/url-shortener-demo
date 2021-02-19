@@ -11,3 +11,7 @@ class HashService:
 
     def __shorten_hash(self, long_hash):
         return long_hash[:self.hash_length]
+
+    def build_hash(self, hash, version):
+        print(hash)
+        return hash + (str(version) if version > 0 else '')

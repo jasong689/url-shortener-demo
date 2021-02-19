@@ -1,3 +1,5 @@
-<div>
-    Congratulations your shortened url is <a href="{{ shortened_url }}">{{ shortened_url }}</a>
-</div>
+{% include './base.html' %}
+
+<h2>
+    Congratulations your shortened url is <a href="{{ scheme }}://{{ shortened_url }}">{{ shortened_url }}</a>
+</h2>

@@ -15,11 +15,14 @@ class BasicHashService:
             raise NotValidException("url not valid")
 
         hash = self.hasher.hash_url(self.url)
-        existing_hash = self.repo.short_exists(hash, self.url)
+        existing_hash = self.repo.get_link_by_short_url(hash, self.url)
 
         if existing_hash is not None:
-            return existing_hash
+            return self.hasher.build_hash(existing_hash.hash_value, existing_hash.ver)
         else:
-            self.repo.create_short(hash, self.url, 'test')
+            current_version = self.repo.get_max_version_by_hash(hash)
+            version = current_version + 1
+            # user is for now simply a hard coded test user
+            self.repo.create_link(hash, self.url, 'test', version)
 
         return hash
