@@ -1,0 +1,18 @@
+<form action="/urls/" method="post">{% csrf_token %}
+    <div>
+        <label for="url">Url to shorten</label>
+        <input name="url" type="text" maxlength="2048" required />
+    </div>
+    {% if is_custom  %}
+    <div>
+        <label for="hash">Short code</label>
+        <input name="hash" type="text" maxlength="8" />
+    </div>
+    {% endif %}
+    {% if hash_exists %}
+    <span>The short code you specified is already taken.</span>
+    {% endif %}
+    <div>
+        <button type="submit">Submit</button>
+    </div>
+</form>

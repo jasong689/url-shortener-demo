@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8080
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgres
+    environment:
+      - PG_USER=${POSTGRES_USER}
+      - PG_PASSWORD=${POSTGRES_PASSWORD}
+      - PG_DB=bitly
+      - PG_HOST=postgres
+      - PG_PORT=5432
+      - HOSTNAME=localhost
+      - PORT=8080
+  postgres:
+    image: postgres
+    volumes:
+      - ./tables:/docker-entrypoint-initdb.d/
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=bitly
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}

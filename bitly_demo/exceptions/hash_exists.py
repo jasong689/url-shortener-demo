@@ -1,0 +1,2 @@
+class HashExists(Exception):
+    pass
