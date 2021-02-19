@@ -14,9 +14,12 @@ class UrlService:
         parseResult = self.parser.get_hash_from_url(short_url)
         
         try:
-            result = self.repo.get_url_by_short(parseResult.hash, parseResult.version)
+            version = int(parseResult.version)
+            result = self.repo.get_url_by_short(parseResult.hash, version)
             return result.original_url
         except Link.DoesNotExist:
+            return None
+        except ValueError:
             return None
     
     def generate_short_from_url(self, form):

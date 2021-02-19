@@ -30,8 +30,12 @@ h2 {
     margin: 20px;
 }
 
-.error {
+div.error {
     color: red;
     font-size: 1.5em;
     margin: 20px;
+}
+
+span.error {
+    color: red;
 }
